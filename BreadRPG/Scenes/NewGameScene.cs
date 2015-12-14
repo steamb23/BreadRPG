@@ -17,11 +17,8 @@ namespace BreadRPG.Scenes
             RETRY:
             Console.WriteLine("영웅의 이름을 결정해주십시오. 가급적이면 한글로 써주십시오.");
             PlayerData.CurrentData.Name = ConsoleEx.ReadText(true);
-            Console.Write("이제 영웅의 이름은 ");
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.Write(PlayerData.CurrentData.Name);
-            Console.ResetColor();
-            Console.WriteLine("입니다.");
+            Console.Write("영웅의 이름은 {0}[이]군요.", PlayerData.CurrentData.Name);
+            ConsoleEx.ColorChange(PlayerData.CurrentData.Name, 14, ConsoleColor.Yellow);
             Console.WriteLine();
 
             Console.WriteLine("그렇다면 {0}의 성별은 무엇입니까?", PlayerData.CurrentData.Name);
@@ -36,11 +33,7 @@ namespace BreadRPG.Scenes
                     ConsoleEx.ClearLine();
                     ConsoleEx.CursorUp();
                     ConsoleEx.ClearLine();
-                    ConsoleKo.Write("이제 {0}[은는] ", PlayerData.CurrentData.Name);
-                    Console.ForegroundColor = ConsoleColor.Cyan;
-                    ConsoleKo.Write("남성");
-                    Console.ResetColor();
-                    Console.WriteLine("입니다.");
+                    ConsoleKo.WriteLine("{0}[은는] 남성이군요.", PlayerData.CurrentData.Name);
                     break;
                 case ConsoleKey.F:
                     PlayerData.CurrentData.Gender = Gender.Female;
@@ -48,15 +41,12 @@ namespace BreadRPG.Scenes
                     ConsoleEx.ClearLine();
                     ConsoleEx.CursorUp();
                     ConsoleEx.ClearLine();
-                    ConsoleKo.Write("이제 {0}[은는] ", PlayerData.CurrentData.Name);
-                    Console.ForegroundColor = ConsoleColor.Magenta;
-                    ConsoleKo.Write("여성");
-                    Console.ResetColor();
-                    Console.WriteLine("입니다.");
+                    ConsoleKo.WriteLine("{0}[은는] 여성이군요.", PlayerData.CurrentData.Name);
                     break;
                 default:
                     goto GENDER_SELECT;
             }
+            
         }
     }
 }

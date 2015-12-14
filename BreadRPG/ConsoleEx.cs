@@ -39,6 +39,10 @@ namespace BreadRPG
             }
             return result;
         }
+        public static string ReadText()
+        {
+            return ReadText(true);
+        }
         public static void ClearLine()
         {
             Console.SetCursorPosition(0, Console.CursorTop);
@@ -48,6 +52,13 @@ namespace BreadRPG
         public static void CursorUp()
         {
             Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop - 1);
+        }
+        public static void ColorChange(string text, int left, ConsoleColor color)
+        {
+            Console.SetCursorPosition(left, Console.CursorTop);
+            Console.ForegroundColor = color;
+            Console.Write(text);
+            Console.ResetColor();
         }
     }
     static class ConsoleKo
