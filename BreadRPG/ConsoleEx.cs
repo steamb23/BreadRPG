@@ -51,7 +51,7 @@ namespace BreadRPG
         }
         public static void CursorUp()
         {
-            Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop - 1);
+            Console.CursorTop--;
         }
         public static void ColorChange(string text, int left, ConsoleColor color)
         {
