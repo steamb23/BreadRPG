@@ -15,12 +15,13 @@ namespace BreadRPG.Scenes
         }
         public void Run()
         {
-            Console.WriteLine("새로 게임을 시작하기 전에 먼저 영웅의 과거사를 만들어야 합니다.");
+            Console.WriteLine("새로 게임을 시작하기 전에 먼저 영웅의 정보에 대해서 작성을 해야합니다.");
             Console.WriteLine();
             PlayerData.Initialize();
             RETRY:
-            Console.WriteLine("영웅의 이름을 결정해주십시오. 반드시 한글로 써주십시오.");
+            Console.WriteLine("영웅의 이름을 결정해주십시오. 띄어쓰기를 하면 첫 글자를 제외한 나머지 글자들은 성이됩니다. 반드시 한글로 써주세요.");
             PlayerData.CurrentData.Name = ConsoleEx.ReadText(true);
+            // 한글여부, 띄어쓰기 여부 체크 추가 필요.
             ConsoleKo.Write("영웅의 이름은 {0}[이]군요.", PlayerData.CurrentData.Name);
             ConsoleEx.ColorChange(PlayerData.CurrentData.Name, 14, ConsoleColor.Yellow);
             Console.WriteLine();
@@ -34,36 +35,112 @@ namespace BreadRPG.Scenes
             {
                 case ConsoleKey.M:
                     PlayerData.CurrentData.Gender = Gender.Male;
-                    ConsoleEx.CursorUp();
-                    ConsoleEx.ClearLine();
-                    ConsoleEx.CursorUp();
-                    ConsoleEx.ClearLine();
-                    ConsoleKo.Write("{0}[은는] 남성이군요.", PlayerData.CurrentData.Name);
-                    ConsoleEx.ColorChange("남성", PlayerData.CurrentData.Name.Length * 2 + 3, ConsoleColor.Cyan);
+                    ConsoleEx.ClearMultipleLines(2);
+                    Console.Write("남성이군요.", PlayerData.CurrentData.Name);
+                    ConsoleEx.ColorChange("남성", 0, ConsoleColor.Cyan);
                     break;
                 case ConsoleKey.F:
                     PlayerData.CurrentData.Gender = Gender.Female;
-                    ConsoleEx.CursorUp();
-                    ConsoleEx.ClearLine();
-                    ConsoleEx.CursorUp();
-                    ConsoleEx.ClearLine();
-                    ConsoleKo.Write("{0}[은는] 여성이군요.", PlayerData.CurrentData.Name);
-                    ConsoleEx.ColorChange("여성", PlayerData.CurrentData.Name.Length * 2 + 3, ConsoleColor.Magenta);
+                    ConsoleEx.ClearMultipleLines(2);
+                    Console.Write("여성이군요.", PlayerData.CurrentData.Name);
+                    ConsoleEx.ColorChange("여성", 0, ConsoleColor.Magenta);
                     break;
                 default:
                     goto GENDER_SELECT;
             }
             Console.WriteLine();
             Console.WriteLine();
-
-            ConsoleKo.WriteLine("유년 시절의 {0}[은는] 무엇을 하며 지냈습니까?", PlayerData.CurrentData.Name);
-            ConsoleEx.SelectElement('1', "주먹을 잘 쓰는 골목 대장이었다.");
-            ConsoleEx.SelectElement('2', "농부인 아버지를 따라 일을 하였다.");
-            ConsoleEx.SelectElement('3', "마법사의 심부름꾼 역할을 하였다.");
-            ConsoleEx.SelectElement('4', "틈만 나면 책을 읽었다.");
-            ConsoleEx.SelectElement('5', "온 도시를 누비던 장난꾸러기였다.");
+            
+            Console.WriteLine("{0}의 출신을 결정해주십시오.", PlayerData.CurrentData.Name)
+            if (PlayerData.CurrentData.Gender = Gender.Male)
+            {
+                ConsoleEx.SelectElement('1', "기사의 아들");
+                ConsoleEx.SelectElement('2', "농부의 아들");
+                ConsoleEx.SelectElement('3', "마법사의 조수");
+                ConsoleEx.SelectElement('4', "교회의 고아");
+                ConsoleEx.SelectElement('5', "사냥꾼의 아들");
+            }
+            else
+            {
+                ConsoleEx.SelectElement('1', "기사의 딸");
+                ConsoleEx.SelectElement('2', "농부의 딸");
+                ConsoleEx.SelectElement('3', "마법사의 조수");
+                ConsoleEx.SelectElement('4', "교회의 고아");
+                ConsoleEx.SelectElement('5', "사냥꾼의 딸");
+            }
+            BORN_SELECT:
             switch (ConsoleEx.Select().Key)
             {
+                case ConsoleKey.D1:
+                    PlayerData.CurrentData.Born = Born.Knight;
+                    ConsoleEx.ClearMultipleLines(5);
+                    if (PlayerData.CurrentData.Gender = Gender.Male)
+                    {
+                        Console.WriteLine("기사의 아들이군요.");
+                        PlayerData.CurrentData.Description = "";
+                    }
+                    else
+                    {
+                        Console.WriteLine("기사의 딸이군요.");
+                        PlayerData.CurrentData.Description = "";
+                    }
+                    break;
+                case ConsoleKey.D2:
+                    PlayerData.CurrentData.Born = Born.Farmer;
+                    ConsoleEx.ClearMultipleLines(5);
+                    if (PlayerData.CurrentData.Gender = Gender.Male)
+                    {
+                        Console.WriteLine("농부의 아들이군요.");
+                        PlayerData.CurrentData.Description = "";
+                    }
+                    else
+                    {
+                        Console.WriteLine("농부의 딸이군요.");
+                        PlayerData.CurrentData.Description = "";
+                    }
+                    break;
+                case ConsoleKey.D3:
+                    PlayerData.CurrentData.Born = Born.Mage;
+                    ConsoleEx.ClearMultipleLines(5);
+                    Console.WriteLine("마법사의 조수군요.");
+                    if (PlayerData.CurrentData.Gender = Gender.Male)
+                    {
+                        PlayerData.CurrentData.Description = "";
+                    }
+                    else
+                    {
+                        PlayerData.CurrentData.Description = "";
+                    }
+                    break;
+                case ConsoleKey.D4:
+                    PlayerData.CurrentData.Born = Born.Priest;
+                    ConsoleEx.ClearMultipleLines(5);
+                    Console.WriteLine("교회의 고아군요.");
+                    if (PlayerData.CurrentData.Gender = Gender.Male)
+                    {
+                        PlayerData.CurrentData.Description = "";
+                    }
+                    else
+                    {
+                        PlayerData.CurrentData.Description = "";
+                    }
+                    break;
+                case ConsoleKey.D5:
+                    PlayerData.CurrentData.Born = Born.Hunter;
+                    ConsoleEx.ClearMultipleLines(5);
+                    if (PlayerData.CurrentData.Gender = Gender.Male)
+                    {
+                        Console.WriteLine("사냥꾼의 아들이군요.");
+                        PlayerData.CurrentData.Description = "";
+                    }
+                    else
+                    {
+                        Console.WriteLine("사냥꾼의 딸이군요.");
+                        PlayerData.CurrentData.Description = "";
+                    }
+                    break;
+                default:
+                    goto BORN_SELECT;
             }
         }
     }

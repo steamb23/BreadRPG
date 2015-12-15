@@ -26,6 +26,14 @@ namespace BreadRPG
             ClearLine();
             return result;
         }
+        public static void ClearMultipleLines(int lines)
+        {
+            for (int i = 0; i < lines; i++)
+            {
+                ConsoleEx.CursorUp();
+                ConsoleEx.ClearLine();
+            }
+        }
         public static string ReadText(bool clear)
         {
             Console.ForegroundColor = ConsoleColor.DarkGray;

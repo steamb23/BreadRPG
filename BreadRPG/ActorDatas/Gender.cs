@@ -11,4 +11,12 @@ namespace BreadRPG.ActorDatas
         Male,
         Female
     }
+    enum Born
+    {
+        Knight,
+        Farmer,
+        Mage,
+        Priest,
+        Hunter
+    }
 }

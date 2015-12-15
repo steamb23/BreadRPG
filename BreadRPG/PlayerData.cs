@@ -26,6 +26,8 @@ namespace BreadRPG
         public Gender Gender;
         public Status Status;
         public Ability Ability;
+        public Born Born;
+        public string Description;
 
         public Status MaxStatus
         {
